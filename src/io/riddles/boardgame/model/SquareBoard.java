@@ -1,7 +1,5 @@
 package io.riddles.boardgame.model;
 
-import io.riddles.exception.IllegalMoveException;
-
 import java.util.List;
 
 /**
@@ -26,7 +24,7 @@ public final class SquareBoard extends AbstractModel implements Board {
     }
 
     @Override
-    public Field getFieldAt(Coordinate coordinate) throws IllegalMoveException {
+    public Field getFieldAt(Coordinate coordinate) throws IndexOutOfBoundsException {
 
         int x = coordinate.getX();
         int y = coordinate.getY();
@@ -36,7 +34,7 @@ public final class SquareBoard extends AbstractModel implements Board {
         int fieldSize = fields.size();
 
         if (index >= fieldSize) {
-            throw new IllegalMoveException("Coordinate out of bounds");
+            throw new IndexOutOfBoundsException("Coordinate out of bounds");
         }
 
         return fields.get(index);

@@ -2,7 +2,7 @@ package io.riddles.chess.move.validator;
 
 import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Move;
-import io.riddles.move.MoveValidator;
+import io.riddles.game.move.MoveValidator;
 
 import java.util.ArrayList;
 

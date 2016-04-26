@@ -13,11 +13,11 @@ import java.util.Optional;
 /**
  * Created by Niko on 24/03/16.
  */
-public class StateDeserializer {
+public class ChessStateDeserializer {
 
     private HashMap<Character, ChessPieceType> pieceMap;
 
-    public StateDeserializer () {
+    public ChessStateDeserializer() {
 
         pieceMap = new HashMap<>();
         pieceMap.put('b', ChessPieceType.BISHOP);
@@ -28,9 +28,10 @@ public class StateDeserializer {
         pieceMap.put('r', ChessPieceType.ROOK);
     }
 
-    public Board traverse (String state) {
+    public ChessState traverse (String state) {
 
-        return this.visit(state);
+        Board board = visit(state);
+        return new ChessState(board);
     }
 
     private Board visit(String state) {
@@ -41,7 +42,7 @@ public class StateDeserializer {
             fields.add(this.visit(character));
         }
 
-        return SquareBoard.of(fields);
+        return new SquareBoard(fields);
     }
 
     private Field visit(Character c) {
@@ -49,8 +50,11 @@ public class StateDeserializer {
         ChessPiece chessPiece;
         ChessPieceColor color;
         ChessPieceType type;
+        Optional<Piece> maybePiece;
 
-        if ('.' != c) {
+        if (c == '.') {
+            maybePiece = Optional.empty();
+        } else {
 
             if (Character.isUpperCase(c)) {
                 color = ChessPieceColor.BLACK;
@@ -62,11 +66,10 @@ public class StateDeserializer {
 
             type = pieceMap.get(c);
 
-            chessPiece = ChessPiece.of(type, color);
+            chessPiece = new ChessPiece(type, color);
+            maybePiece = Optional.of(chessPiece);
         }
 
-        Optional<Piece> maybePiece = Optional.ofNullable(chessPiece);
-
-        return Field.of(maybePiece);
+        return new Field(maybePiece);
     }
 }

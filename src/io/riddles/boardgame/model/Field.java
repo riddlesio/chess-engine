@@ -1,8 +1,5 @@
 package io.riddles.boardgame.model;
 
-import io.riddles.model.Visitor;
-import io.riddles.model.Traversible;
-
 import java.util.Optional;
 
 /**
@@ -24,10 +21,5 @@ public class Field extends AbstractModel {
 
     public void setPiece(Optional<Piece> maybePiece) {
         this.maybePiece = maybePiece;
-    }
-
-    public static Field of(Optional<Piece> maybePiece) {
-
-        return new Field(maybePiece);
     }
 }

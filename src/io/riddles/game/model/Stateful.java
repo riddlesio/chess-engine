@@ -1,9 +1,9 @@
-package io.riddles.model;
+package io.riddles.game.model;
 
 import java.util.Optional;
 
 /**
- * io.riddles.model
+ * io.riddles.game.model
  * <p>
  * This file is a part of chess
  * <p>

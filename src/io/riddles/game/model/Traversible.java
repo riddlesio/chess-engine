@@ -1,4 +1,4 @@
-package io.riddles.model;
+package io.riddles.game.model;
 
 /**
  * Created by Niko on 24/03/16.

@@ -1,5 +1,6 @@
 package io.riddles.game.engine;
 
+import io.riddles.game.exception.InvalidMoveException;
 import io.riddles.game.io.Command;
 
 /**
@@ -18,6 +19,6 @@ public interface Processor<State> {
 
     boolean hasGameEnded(State state);
 
-    State processException(Exception exception, State state);
-    State processInput(String input, State state);
+    State processException(State state, Exception exception);
+    State processInput(State state, String input) throws InvalidMoveException;
 }

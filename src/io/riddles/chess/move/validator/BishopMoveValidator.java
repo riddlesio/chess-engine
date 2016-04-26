@@ -4,7 +4,7 @@ import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Coordinate;
 import io.riddles.boardgame.model.Move;
 import io.riddles.chess.model.*;
-import io.riddles.move.MoveValidator;
+import io.riddles.game.move.MoveValidator;
 
 /**
  * Created by Niko on 26/03/16.

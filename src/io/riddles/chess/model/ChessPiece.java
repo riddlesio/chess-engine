@@ -1,8 +1,8 @@
 package io.riddles.chess.model;
 
 import io.riddles.boardgame.model.Piece;
-import io.riddles.model.Visitor;
-import io.riddles.model.Traversible;
+import io.riddles.game.model.Visitor;
+import io.riddles.game.model.Traversible;
 
 /**
  * Created by Niko on 24/03/16.

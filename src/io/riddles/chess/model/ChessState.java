@@ -1,18 +1,19 @@
 package io.riddles.chess.model;
 
+import io.riddles.boardgame.model.AbstractModel;
 import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.BoardState;
 import io.riddles.boardgame.model.Move;
-import io.riddles.model.Stateful;
-import io.riddles.model.Traversible;
-import io.riddles.model.Visitor;
+import io.riddles.game.model.Stateful;
+import io.riddles.game.model.Traversible;
+import io.riddles.game.model.Visitor;
 
 import java.util.Optional;
 
 /**
  * Created by Niko on 24/03/16.
  */
-public final class ChessState implements Stateful<ChessState>, BoardState, Traversible {
+public final class ChessState extends AbstractModel implements Stateful<ChessState>, BoardState, Traversible {
 
     private Board board;
     private Optional<Exception> exception;
@@ -20,7 +21,7 @@ public final class ChessState implements Stateful<ChessState>, BoardState, Trave
     private int moveNumber;
     private Optional<ChessState> previousState;
 
-    private ChessState(Board board) {
+    public ChessState(Board board) {
 
         this.board = board;
 
@@ -30,7 +31,7 @@ public final class ChessState implements Stateful<ChessState>, BoardState, Trave
         previousState   = Optional.empty();
     }
 
-    private ChessState(ChessState previousState, Exception exception) {
+    public ChessState(ChessState previousState, Exception exception) {
 
         this.exception      = Optional.of(exception);
         this.previousState  = Optional.of(previousState);
@@ -40,7 +41,7 @@ public final class ChessState implements Stateful<ChessState>, BoardState, Trave
         moveNumber  = previousState.getMoveNumber();
     }
 
-    private ChessState(ChessState previousState, Board board, Move move) {
+    public ChessState(ChessState previousState, Board board, Move move) {
 
         this.board          = board;
         this.previousState  = Optional.of(previousState);
@@ -89,20 +90,5 @@ public final class ChessState implements Stateful<ChessState>, BoardState, Trave
     public Boolean hasPreviousState() {
 
         return previousState.map(previousState -> true).orElse(false);
-    }
-
-    public static ChessState of (Board board) {
-
-        return new ChessState(board);
-    }
-
-    public static ChessState of (ChessState previousState, Exception exception) {
-
-        return new ChessState(previousState, exception);
-    }
-
-    public static ChessState of (ChessState previousState, Board board, Move move) {
-
-        return new ChessState(previousState, board, move);
     }
 }

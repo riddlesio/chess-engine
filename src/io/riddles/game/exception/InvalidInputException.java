@@ -12,6 +12,10 @@ package io.riddles.game.exception;
  */
 public class InvalidInputException extends Exception {
 
+    public InvalidInputException(String message) {
+        super(message);
+    }
+
     @Override
     public String getMessage() {
         return "Invalid input: " + super.getMessage();

@@ -1,7 +1,7 @@
 package io.riddles.boardgame.model;
 
-import io.riddles.model.Traversible;
-import io.riddles.model.Visitor;
+import io.riddles.game.model.Traversible;
+import io.riddles.game.model.Visitor;
 
 /**
  * Created by Niko on 28/03/16.

@@ -12,6 +12,10 @@ package io.riddles.game.exception;
  */
 public class InvalidMoveException extends Exception {
 
+    public InvalidMoveException(String message) {
+        super(message);
+    }
+
     @Override
     public String getMessage() {
         return "Invalid move: " + super.getMessage();

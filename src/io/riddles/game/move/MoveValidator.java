@@ -1,4 +1,4 @@
-package io.riddles.move;
+package io.riddles.game.move;
 
 import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Move;
@@ -8,7 +8,7 @@ import io.riddles.boardgame.model.Move;
  */
 public interface MoveValidator {
 
-    public Boolean isApplicable(Move move, Board board);
+    Boolean isApplicable(Move move, Board board);
 
-    public Boolean isValid(Move move, Board board);
+    Boolean isValid(Move move, Board board);
 }

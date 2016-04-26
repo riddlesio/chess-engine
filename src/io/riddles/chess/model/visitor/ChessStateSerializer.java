@@ -5,22 +5,22 @@ import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Field;
 import io.riddles.boardgame.model.Piece;
 import io.riddles.chess.model.*;
-import io.riddles.model.Visitor;
+import io.riddles.game.model.Traversible;
+import io.riddles.game.model.Visitor;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Optional;
 
 /**
  * Created by Niko on 24/03/16.
  */
-public class StateSerializer implements Visitor {
+public class ChessStateSerializer implements Visitor {
 
     private Dictionary<ChessPieceType, Character> pieceMap;
     private String state;
 
-    public StateSerializer() {
+    public ChessStateSerializer() {
 
         pieceMap = new Hashtable<>();
         pieceMap.put(ChessPieceType.BISHOP, 'b');
@@ -40,7 +40,6 @@ public class StateSerializer implements Visitor {
         return state;
     }
 
-    @Override
     public void visit(AbstractModel model) {}
 
     public void visit(Board board) {
@@ -75,4 +74,7 @@ public class StateSerializer implements Visitor {
 
         state += p;
     }
+
+    @Override
+    public void visit(Traversible traversible) {}
 }

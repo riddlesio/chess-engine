@@ -3,11 +3,8 @@ package io.riddles.chess.move.validator;
 import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Coordinate;
 import io.riddles.boardgame.model.Move;
-import io.riddles.boardgame.model.Piece;
 import io.riddles.chess.model.*;
-import io.riddles.move.MoveValidator;
-
-import java.util.Optional;
+import io.riddles.game.move.MoveValidator;
 
 /**
  * Created by Niko on 26/03/16.

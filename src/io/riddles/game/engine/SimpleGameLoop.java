@@ -27,11 +27,11 @@ public class SimpleGameLoop<State> implements GameLoop<State> {
             input = io.execute(command);
 
             try {
-                state = processor.processInput(input, state);
+                state = processor.processInput(state, input);
 
             } catch (Exception exception) {
 
-                state = processor.processException(exception, state);
+                state = processor.processException(state, exception);
             }
         }
 
