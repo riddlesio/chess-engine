@@ -20,5 +20,5 @@ public interface Processor<State> {
     boolean hasGameEnded(State state);
 
     State processException(State state, Exception exception);
-    State processInput(State state, String input) throws InvalidMoveException;
+    State processInput(State state, String input) throws InvalidMoveException, Exception;
 }

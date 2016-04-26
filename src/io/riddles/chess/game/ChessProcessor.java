@@ -2,9 +2,11 @@ package io.riddles.chess.game;
 
 import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Move;
+import io.riddles.boardgame.visitor.BoardGameMoveDeserializer;
 import io.riddles.chess.model.ChessState;
 import io.riddles.chess.move.validator.ChessMoveValidator;
 import io.riddles.game.engine.Processor;
+import io.riddles.game.exception.InvalidInputException;
 import io.riddles.game.exception.InvalidMoveException;
 import io.riddles.game.io.Command;
 import io.riddles.game.move.MoveValidator;
@@ -40,13 +42,14 @@ public class ChessProcessor implements Processor<ChessState> {
     }
 
     @Override
-    public ChessState processInput(ChessState state, String input) throws InvalidMoveException {
+    public ChessState processInput(ChessState state, String input) throws Exception {
 
         MoveValidator validator = new ChessMoveValidator();
 
         Board board = state.getBoard();
-        // TODO: implement parser
-        Move move; = parser.parseInput(input);
+
+        BoardGameMoveDeserializer moveDeserializer = new BoardGameMoveDeserializer();
+        Move move = moveDeserializer.traverse(input);
 
         if (!validator.isValid(move, board)) {
             // FIXME: throw a more descriptive error
