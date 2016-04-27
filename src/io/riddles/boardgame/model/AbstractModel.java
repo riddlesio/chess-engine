@@ -4,7 +4,14 @@ import io.riddles.game.model.Traversible;
 import io.riddles.game.model.Visitor;
 
 /**
- * Created by Niko on 28/03/16.
+ * ${PACKAGE_NAME}
+ *
+ * This file is a part of chess
+ *
+ * Copyright 2016 - present Riddles.io
+ * For license information see the LICENSE file in the project root
+ *
+ * @author Niko
  */
 public abstract class AbstractModel implements Traversible {
 

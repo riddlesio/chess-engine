@@ -3,23 +3,23 @@ package io.riddles.chess.game;
 import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Move;
 import io.riddles.boardgame.visitor.BoardGameMoveDeserializer;
+import io.riddles.boardgame.visitor.SimpleBoardGameMoveDeserializer;
 import io.riddles.chess.model.ChessState;
 import io.riddles.chess.move.validator.ChessMoveValidator;
 import io.riddles.game.engine.Processor;
-import io.riddles.game.exception.InvalidInputException;
 import io.riddles.game.exception.InvalidMoveException;
 import io.riddles.game.io.Command;
 import io.riddles.game.move.MoveValidator;
 
 /**
- * io.riddles.chess.game
- * <p>
- * This file is a part of chess
- * <p>
+ * This class is the connects the Chess game with the encapsulating
+ * framework. It should implement all methods required for the
+ * Riddles.io framework to retrieve the necessary game data.
+ *
  * Copyright 2016 - present Riddles.io
  * For license information see the LICENSE file in the project root
  *
- * @author Niko
+ * @author Niko van Meurs <niko@riddles.io>
  */
 public class ChessProcessor implements Processor<ChessState> {
 
@@ -48,7 +48,7 @@ public class ChessProcessor implements Processor<ChessState> {
 
         Board board = state.getBoard();
 
-        BoardGameMoveDeserializer moveDeserializer = new BoardGameMoveDeserializer();
+        BoardGameMoveDeserializer moveDeserializer = new SimpleBoardGameMoveDeserializer();
         Move move = moveDeserializer.traverse(input);
 
         if (!validator.isValid(move, board)) {

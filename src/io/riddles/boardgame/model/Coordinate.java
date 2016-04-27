@@ -1,7 +1,14 @@
 package io.riddles.boardgame.model;
 
 /**
- * Created by Niko on 26/03/16.
+ * ${PACKAGE_NAME}
+ *
+ * This file is a part of chess
+ *
+ * Copyright 2016 - present Riddles.io
+ * For license information see the LICENSE file in the project root
+ *
+ * @author Niko
  */
 public class Coordinate {
 

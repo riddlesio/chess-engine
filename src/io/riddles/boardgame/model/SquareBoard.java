@@ -7,7 +7,7 @@ import java.util.List;
  */
 public final class SquareBoard extends AbstractModel implements Board {
 
-    protected List<Field> fields;
+    private List<Field> fields;
 
     /**
      * Board constructor
