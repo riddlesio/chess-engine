@@ -10,5 +10,8 @@ package io.riddles.game.io;
  *
  * @author Niko
  */
-public interface Command {
+public interface IOResponse {
+
+    IORequest getRequest();
+    String getValue();
 }

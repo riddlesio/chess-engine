@@ -10,7 +10,7 @@ package io.riddles.game.io;
  *
  * @author Niko
  */
-public interface IO {
+public interface IORequest {
 
-    String execute(Command command);
+    String getValue();
 }

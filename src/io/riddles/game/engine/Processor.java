@@ -1,7 +1,7 @@
 package io.riddles.game.engine;
 
-import io.riddles.game.exception.InvalidMoveException;
-import io.riddles.game.io.Command;
+import io.riddles.game.io.IORequest;
+import io.riddles.game.io.IOResponse;
 
 /**
  * This interface describes the functions required for consumption by
@@ -21,9 +21,9 @@ public interface Processor<State> {
     /**
      * Returns the next command according to the provided state
      * @param state - The state to be interpreted to generate the Command
-     * @return {Command}
+     * @return {IORequest}
      */
-    Command getCommand(State state);
+    IORequest getRequest(State state);
 
     /**
      * Determines whether the game has ended for the provided state
@@ -47,5 +47,5 @@ public interface Processor<State> {
      * @return {State}
      * @throws Exception - When input cannot be converted to a move or the move is invalid
      */
-    State processInput(State state, String input) throws Exception;
+    State processInput(State state, IOResponse input) throws Exception;
 }
