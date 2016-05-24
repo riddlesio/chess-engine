@@ -10,6 +10,11 @@ package io.riddles.game.io;
  *
  * @author Niko
  */
-public interface IORequest<RequestType> {
-    RequestType getType();
+public class AbstractIOProvider {
+
+    protected IOHandler handler;
+
+    public AbstractIOProvider(IOHandler handler) {
+        this.handler = handler;
+    }
 }

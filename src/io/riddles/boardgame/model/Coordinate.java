@@ -1,5 +1,8 @@
 package io.riddles.boardgame.model;
 
+import io.riddles.game.model.Traversible;
+import io.riddles.game.model.Visitor;
+
 /**
  * ${PACKAGE_NAME}
  *
@@ -10,7 +13,7 @@ package io.riddles.boardgame.model;
  *
  * @author Niko
  */
-public class Coordinate {
+public class Coordinate extends AbstractModel {
 
     private int x;
     private int y;

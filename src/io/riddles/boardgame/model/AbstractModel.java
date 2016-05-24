@@ -16,7 +16,7 @@ import io.riddles.game.model.Visitor;
 public abstract class AbstractModel implements Traversible {
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
+    public <ReturnType> ReturnType accept(Visitor<ReturnType> visitor) {
+        return visitor.visit(this);
     }
 }

@@ -8,7 +8,7 @@ package io.riddles.game.io;
  *
  * @author Niko van Meurs <niko@riddles.io>
  */
-public interface IOProvider {
+public interface IOProvider<IORequestType> {
 
-    IOResponse execute(IORequest IORequest);
+    IOResponse execute(IORequest<IORequestType> request);
 }

@@ -12,5 +12,5 @@ package io.riddles.game.model;
  */
 public interface Traversible {
 
-    void accept(Visitor visitor);
+    <ReturnType> ReturnType accept(Visitor<ReturnType> visitor);
 }

@@ -1,7 +1,7 @@
-package io.riddles.game.io;
+package io.riddles.chess.io;
 
 /**
- * io.riddles.game.io
+ * io.riddles.chess.io
  * <p>
  * This file is a part of chess
  * <p>
@@ -10,6 +10,7 @@ package io.riddles.game.io;
  *
  * @author Niko
  */
-public interface IORequest<RequestType> {
-    RequestType getType();
+public enum ChessIORequestType {
+    MOVE,
+    PROMOTE
 }
