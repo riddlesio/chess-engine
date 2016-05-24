@@ -1,7 +1,7 @@
 package io.riddles.chess.game;
 
 import io.riddles.chess.model.ChessState;
-import io.riddles.chess.model.visitor.ChessStateDeserializer;
+import io.riddles.chess.visitor.ChessStateDeserializer;
 import io.riddles.game.engine.GameEngine;
 import io.riddles.game.engine.GameLoop;
 import io.riddles.game.engine.Processor;

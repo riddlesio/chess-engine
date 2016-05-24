@@ -1,9 +1,9 @@
-package io.riddles.chess.move.validator;
+package io.riddles.chess.validator;
 
 import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Move;
 import io.riddles.chess.model.*;
-import io.riddles.game.move.MoveValidator;
+import io.riddles.game.validator.MoveValidator;
 
 /**
  * ${PACKAGE_NAME}

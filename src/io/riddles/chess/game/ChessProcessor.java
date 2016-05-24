@@ -5,11 +5,11 @@ import io.riddles.boardgame.model.Move;
 import io.riddles.boardgame.visitor.BoardGameMoveDeserializer;
 import io.riddles.boardgame.visitor.SimpleBoardGameMoveDeserializer;
 import io.riddles.chess.model.ChessState;
-import io.riddles.chess.move.validator.ChessMoveValidator;
+import io.riddles.chess.validator.ChessMoveValidator;
 import io.riddles.game.engine.Processor;
 import io.riddles.game.exception.InvalidMoveException;
 import io.riddles.game.io.Command;
-import io.riddles.game.move.MoveValidator;
+import io.riddles.game.validator.MoveValidator;
 
 /**
  * This class is the connects the Chess game with the encapsulating

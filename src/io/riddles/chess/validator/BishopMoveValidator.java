@@ -1,10 +1,10 @@
-package io.riddles.chess.move.validator;
+package io.riddles.chess.validator;
 
 import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Coordinate;
 import io.riddles.boardgame.model.Move;
 import io.riddles.chess.model.*;
-import io.riddles.game.move.MoveValidator;
+import io.riddles.game.validator.MoveValidator;
 
 /**
  * ${PACKAGE_NAME}
@@ -16,11 +16,12 @@ import io.riddles.game.move.MoveValidator;
  *
  * @author Niko
  */
-public class RookMoveValidator extends ChessPieceMoveValidator implements MoveValidator {
+public class BishopMoveValidator extends ChessPieceMoveValidator implements MoveValidator {
 
+    @Override
     public Boolean isApplicable(Move move, Board board) {
 
-        return this.isMovedPieceOfType(move, board, ChessPieceType.ROOK);
+        return this.isMovedPieceOfType(move, board, ChessPieceType.BISHOP);
     }
 
     @Override
@@ -29,10 +30,10 @@ public class RookMoveValidator extends ChessPieceMoveValidator implements MoveVa
         Coordinate from = move.getFrom();
         Coordinate to = move.getTo();
 
-        int deltaX = to.getX() - from.getX();
-        int deltaY = to.getY() - from.getY();
+        int deltaX = Math.abs(to.getX() - from.getX());
+        int deltaY = Math.abs(to.getY() - from.getY());
 
-        return deltaX == 0 || deltaY == 0;
+        return deltaX == deltaY;
 
 //        throw new IllegalMoveException("The bishop can only move diagonally");
     }

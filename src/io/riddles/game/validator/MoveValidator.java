@@ -1,4 +1,4 @@
-package io.riddles.game.move;
+package io.riddles.game.validator;
 
 import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Move;

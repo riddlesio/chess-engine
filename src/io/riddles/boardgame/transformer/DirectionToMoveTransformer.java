@@ -2,11 +2,11 @@ package io.riddles.boardgame.transformer;
 
 import io.riddles.boardgame.model.Coordinate;
 import io.riddles.boardgame.model.Move;
-import io.riddles.chess.model.Direction;
+import io.riddles.boardgame.model.Direction;
 
 import java.util.function.Function;
 
-import static io.riddles.chess.model.Direction.*;
+import static io.riddles.boardgame.model.Direction.*;
 
 /**
  * io.riddles.boardgame.transformer

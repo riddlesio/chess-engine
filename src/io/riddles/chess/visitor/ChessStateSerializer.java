@@ -1,4 +1,4 @@
-package io.riddles.chess.model.visitor;
+package io.riddles.chess.visitor;
 
 import io.riddles.boardgame.model.AbstractModel;
 import io.riddles.boardgame.model.Board;

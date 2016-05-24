@@ -1,4 +1,4 @@
-package io.riddles.chess.move.validator;
+package io.riddles.chess.validator;
 
 import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Coordinate;

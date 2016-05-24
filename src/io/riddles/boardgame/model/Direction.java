@@ -1,4 +1,4 @@
-package io.riddles.chess.model;
+package io.riddles.boardgame.model;
 
 /**
  * io.riddles.chess.model

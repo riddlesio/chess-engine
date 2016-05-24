@@ -1,5 +1,6 @@
 package io.riddles.boardgame.transformer;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import io.riddles.boardgame.model.Move;
 
 /**
@@ -14,6 +15,6 @@ import io.riddles.boardgame.model.Move;
  */
 public interface MoveTransformer<State, Transformable> {
 
-    Move transform(State state, Transformable source);
-    Transformable reverseTransform(Move move);
+    Move transform(State state, Transformable source) throws InvalidArgumentException;
+    Transformable reverseTransform(Move move) throws InvalidArgumentException;
 }
