@@ -1,6 +1,7 @@
 package io.riddles.chess.io;
 
 import io.riddles.chess.visitor.ChessIORequestSerializer;
+import io.riddles.chess.visitor.ChessIOResponseDeserializer;
 import io.riddles.game.io.AbstractIOProvider;
 import io.riddles.game.io.IOProvider;
 import io.riddles.game.io.IORequest;
@@ -68,7 +69,7 @@ public class ChessIOProvider extends AbstractIOProvider implements IOProvider<Ch
         return serializer.traverse(request);
     }
 
-    private IOResponse parseResponse(String input, IORequest request) {
+    private ChessIOResponse parseResponse(String input, ChessIORequest request) {
 
         ChessIOResponseDeserializer deserializer = new ChessIOResponseDeserializer();
         return deserializer.traverse(input, request);

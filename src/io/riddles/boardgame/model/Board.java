@@ -1,5 +1,7 @@
 package io.riddles.boardgame.model;
 
+import io.riddles.game.model.Traversible;
+
 import java.util.List;
 
 /**
@@ -12,7 +14,7 @@ import java.util.List;
  *
  * @author Niko
  */
-public interface Board {
+public interface Board extends Traversible {
 
     List<Field> getFields();
     Field getFieldAt(Coordinate coordinate) throws IndexOutOfBoundsException;

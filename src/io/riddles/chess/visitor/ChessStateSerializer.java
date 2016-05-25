@@ -1,6 +1,5 @@
 package io.riddles.chess.visitor;
 
-import io.riddles.boardgame.model.AbstractModel;
 import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Field;
 import io.riddles.boardgame.model.Piece;
@@ -22,7 +21,7 @@ import java.util.Optional;
  *
  * @author Niko
  */
-public class ChessStateSerializer implements Visitor {
+public class ChessStateSerializer implements Visitor<String> {
 
     private Dictionary<ChessPieceType, Character> pieceMap;
     private String state;
@@ -40,48 +39,46 @@ public class ChessStateSerializer implements Visitor {
 
     public String traverse (Board board) {
 
-        state = "";
-
-        this.visit(board);
-
-        return state;
+        return board.accept(this);
     }
 
-    public void visit(AbstractModel model) {}
+    public String visit(Board board) {
 
-    public void visit(Board board) {
+        String result = "";
 
-        board.getFields().forEach(field -> field.accept(this));
+        for (Field field : board.getFields()) {
+
+            result = result.concat(field.accept(this));
+        }
+
+        return result;
     }
 
-    public void visit(Field field) {
+    public String visit(Field field) {
 
         Optional<Piece> maybePiece = field.getPiece();
 
-        maybePiece.ifPresent(piece -> piece.accept(this));
-
-        if (!maybePiece.isPresent()) {
-            state += '.';
-        }
+        return maybePiece
+                .map(piece -> piece.accept(this))
+                .orElse(".");
     }
 
-    public void visit(ChessPiece chessPiece) {
+    public String visit(ChessPiece chessPiece) {
 
         Character p;
         ChessPieceType type;
 
         type = chessPiece.getType();
-        p    = this.pieceMap.get(type);
+        p    = pieceMap.get(type);
 
-        if (ChessPieceColor.BLACK == chessPiece.getColor()) {
+        if (ChessPieceColor.WHITE == chessPiece.getColor()) {
 
-            state += Character.toUpperCase(p);
-            return;
+            return String.valueOf(p);
         }
 
-        state += p;
+        return String.valueOf(Character.toUpperCase(p));
     }
 
     @Override
-    public void visit(Traversible traversible) {}
+    public String visit(Traversible traversible) { return ""; }
 }

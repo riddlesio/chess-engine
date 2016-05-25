@@ -18,12 +18,6 @@ import io.riddles.game.model.Visitor;
  */
 public class ChessIORequestSerializer implements Visitor<String> {
 
-    private String result;
-
-    public ChessIORequestSerializer() {
-        result = "";
-    }
-
     public String traverse(ChessIORequest request) {
         return request.accept(this);
     }

@@ -1,6 +1,7 @@
 package io.riddles.chess.visitor;
 
 import io.riddles.chess.io.ChessIORequest;
+import io.riddles.chess.io.ChessIOResponse;
 
 /**
  * io.riddles.chess.visitor
@@ -12,7 +13,7 @@ import io.riddles.chess.io.ChessIORequest;
  *
  * @author Niko
  */
-public class ChessIOResponseSerializer {
+public class ChessIOResponseDeserializer {
 
     public ChessIOResponse traverse(String input, ChessIORequest request) {
 
