@@ -1,5 +1,6 @@
 package io.riddles.game.engine;
 
+import io.riddles.chess.io.ChessIORequestType;
 import io.riddles.game.io.IORequest;
 import io.riddles.game.io.IOProvider;
 import io.riddles.game.io.IOResponse;
@@ -22,7 +23,9 @@ public class SimpleGameLoop<State> implements GameLoop<State> {
      * @inheritDoc
      */
     @Override
-    public State run(IOProvider ioProvider, Processor<State> processor, State initialState) {
+    public State run(IOProvider ioProvider,
+                     Processor<State> processor,
+                     State initialState) {
 
         IORequest request;
         IOResponse response;

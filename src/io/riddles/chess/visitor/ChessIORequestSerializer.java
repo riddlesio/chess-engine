@@ -1,6 +1,5 @@
 package io.riddles.chess.visitor;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import io.riddles.boardgame.model.Coordinate;
 import io.riddles.chess.io.ChessIORequest;
 import io.riddles.game.model.Traversible;
@@ -36,7 +35,7 @@ public class ChessIORequestSerializer implements Visitor<String> {
                 return String.format("PROMOTE %s", coordinate.accept(this));
         }
 
-        throw new Exception("Could not parse IORequest");
+        throw new InvalidArgumentException("Could not parse IORequest");
     }
 
     public String visit(Coordinate coordinate) {

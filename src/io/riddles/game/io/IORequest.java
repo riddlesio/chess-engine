@@ -10,6 +10,6 @@ package io.riddles.game.io;
  *
  * @author Niko
  */
-public interface IORequest<RequestType> {
-    RequestType getType();
+public interface IORequest {
+    Enum<?> getType();
 }
