@@ -17,7 +17,7 @@ import java.util.Optional;
  *
  * @author Niko
  */
-public class ChessIORequest implements Traversible, IORequest<ChessIORequestType> {
+public class ChessIORequest implements Traversible, IORequest {
 
     private ChessIORequestType type;
     private Optional<Coordinate> coordinate;
