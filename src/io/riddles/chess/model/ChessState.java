@@ -58,11 +58,6 @@ public final class ChessState extends AbstractModel implements Stateful<ChessSta
         moveNumber     = previousState.getMoveNumber() + 1;
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
     public Board getBoard() { return board; }
 
     @Override

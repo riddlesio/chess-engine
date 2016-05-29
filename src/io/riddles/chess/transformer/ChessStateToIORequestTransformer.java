@@ -13,22 +13,24 @@ import io.riddles.game.transformer.Transformer;
 import java.util.Optional;
 
 /**
- * Created by Niko on 29/05/16.
+ * Transforms a ChessState into an IORequest
  */
 public class ChessStateToIORequestTransformer implements Transformer<ChessState, ChessIORequest> {
 
-    SquareBoardLogic boardLogic;
-    ChessPieceLogic pieceLogic;
+    private SquareBoardLogic boardLogic;
+    private ChessPieceLogic pieceLogic;
 
     public ChessStateToIORequestTransformer() {
         boardLogic = new SquareBoardLogic();
         pieceLogic = new ChessPieceLogic();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public ChessIORequest transform(ChessState state) {
 
-        Move previousMove;
         Optional<Move> optionalPreviousMove = state.getMove();
 
         // Handle game start
@@ -36,23 +38,27 @@ public class ChessStateToIORequestTransformer implements Transformer<ChessState,
             return createInitialMoveRequest();
         }
 
-        previousMove = optionalPreviousMove.get();
-
         // Handle promotion
-        if (stateHasPromotablePiece(state, previousMove)) {
-            return createPromotionRequest(state, previousMove);
+        if (stateHasPromotablePiece(state)) {
+            return createPromotionRequest(state);
         }
 
         // Everything else is a simple move request
-        return createMoveRequest(state, previousMove);
+        return createMoveRequest(state);
     }
 
-    protected ChessIORequest createMoveRequest(ChessState state, Move previousMove) {
+    /**
+     * Creates an IORequest for the next player to move a piece,
+     * based on the passed state and move
+     * @param state The state upon which to base the next move
+     * @return IORequest for the next player to move a piece
+     */
+    protected ChessIORequest createMoveRequest(ChessState state) {
 
         ChessPieceColor colorToMove;
-        ChessPiece movedPiece = getMovedPiece(state, previousMove);
+        ChessPiece movedPiece = getMovedPiece(state);
 
-        if (pieceLogic.hasColorBlack(movedPiece)) {
+        if (movedPiece.hasColor(ChessPieceColor.BLACK)) {
             colorToMove = ChessPieceColor.WHITE;
         } else {
             colorToMove = ChessPieceColor.BLACK;
@@ -61,43 +67,71 @@ public class ChessStateToIORequestTransformer implements Transformer<ChessState,
         return new ChessIORequest(colorToMove, ChessIORequestType.MOVE);
     }
 
+    /**
+     * Creates an IORequest for WHITE to move a piece (ie. first move of the game)
+     * @return IORequest for WHITE to move a piece
+     */
     protected ChessIORequest createInitialMoveRequest() {
 
         return new ChessIORequest(ChessPieceColor.WHITE, ChessIORequestType.MOVE);
     }
 
-    protected ChessIORequest createPromotionRequest(ChessState state, Move move) {
+    /**
+     * Creates an IORequest for the current player to promote his/her PAWN
+     * @param state The state which holds a promotable pawn
+     * @return IORequest for the current player to promote the designated pawn
+     */
+    protected ChessIORequest createPromotionRequest(ChessState state) {
 
-        Coordinate coordinate = move.getTo();
-        ChessPieceColor pieceColor = getColorOfMovedPiece(state, move);
+        Move previousMove = getLastMove(state);
+        Coordinate coordinate = previousMove.getTo();
+        ChessPieceColor pieceColor = getColorOfMovedPiece(state);
 
         return new ChessIORequest(pieceColor, ChessIORequestType.PROMOTE, coordinate);
     }
 
-    protected boolean stateHasPromotablePiece(ChessState state, Move previousMove) {
+    /**
+     * Checks whether the passed state holds pawn which can be promoted
+     * @param state The state which to check for a promotable piece
+     * @return True if the states contains a promotable pawn, false otherwise
+     */
+    protected boolean stateHasPromotablePiece(ChessState state) {
 
         SquareBoard board = (SquareBoard) state.getBoard();
+        Move previousMove = getLastMove(state);
         Coordinate coordinate = previousMove.getTo();
-        ChessPiece movedPiece = getMovedPiece(state, previousMove);
+        ChessPiece movedPiece = getMovedPiece(state);
 
         if (!pieceLogic.hasTypePawn(movedPiece)) {
             return false;
         }
 
         if (pieceLogic.hasColorWhite(movedPiece)) {
-            return boardLogic.isCoordinateAtBottomEdge(coordinate, board);
+            return boardLogic.isCoordinateAtBottomEdge(board, coordinate);
         }
 
-        return boardLogic.isCoordinateAtTopEdge(coordinate, board);
+        return boardLogic.isCoordinateAtTopEdge(board, coordinate);
     }
 
-    protected ChessPieceColor getColorOfMovedPiece(ChessState state, Move move) {
+    /**
+     * Returns the PieceColor of the last moved piece
+     * @param state The state from which to retrieve the last moved piece
+     * @return ChessPieceColor of the last moved piece
+     */
+    protected ChessPieceColor getColorOfMovedPiece(ChessState state) {
 
-        Piece piece = getMovedPiece(state, move);
+        Piece piece = getMovedPiece(state);
         return (ChessPieceColor) piece.getColor();
     }
 
-    protected ChessPiece getMovedPiece(ChessState state, Move move) {
+    /**
+     * Get the piece which was moved in the previous IOResponse
+     * @param state The state from which to retrieve the last moved piece
+     * @return The last moved piece
+     */
+    protected ChessPiece getMovedPiece(ChessState state) {
+
+        Move move = getLastMove(state);
         Coordinate coordinate = move.getTo();
 
         Optional<Piece> optionalPiece = state
@@ -110,5 +144,21 @@ public class ChessStateToIORequestTransformer implements Transformer<ChessState,
         }
 
         return (ChessPiece) optionalPiece.get();
+    }
+
+    /**
+     * Gets the last executed move
+     * @param state The state from which to retrieve the last move
+     * @return The last executed move
+     */
+    protected Move getLastMove(ChessState state) {
+
+        Optional<Move> optionalPreviousMove = state.getMove();
+
+        if(!optionalPreviousMove.isPresent()) {
+            throw new RuntimeException("No move present in given state");
+        }
+
+        return optionalPreviousMove.get();
     }
 }

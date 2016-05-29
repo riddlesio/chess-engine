@@ -4,8 +4,6 @@ import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Move;
 import io.riddles.boardgame.visitor.BoardGameMoveDeserializer;
 import io.riddles.boardgame.visitor.SimpleBoardGameMoveDeserializer;
-import io.riddles.chess.io.ChessIORequest;
-import io.riddles.chess.io.ChessIORequestType;
 import io.riddles.chess.model.ChessState;
 import io.riddles.chess.transformer.ChessStateToIORequestTransformer;
 import io.riddles.chess.validator.ChessMoveValidator;
