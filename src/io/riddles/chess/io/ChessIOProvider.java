@@ -52,15 +52,15 @@ public class ChessIOProvider extends AbstractIOProvider implements IOProvider<Ch
      * @return Response to the IORequest
      */
     @Override
-    public IOResponse execute(IORequest<ChessIORequestType> request) {
+    public IOResponse execute(IORequest request) {
 
         int playerId = 0;
-        ChessIORequestType requestType = request.getType();
+        Enum<?> requestType = request.getType();
         String parsedRequest = parseRequest((ChessIORequest) request);
 
         String rawResponse = handler.sendRequest(playerId, parsedRequest);
 
-        return parseResponse(rawResponse, request);
+        return parseResponse(rawResponse, (ChessIORequest) request);
     }
 
     private String parseRequest(ChessIORequest request) {

@@ -4,8 +4,10 @@ import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Move;
 import io.riddles.boardgame.visitor.BoardGameMoveDeserializer;
 import io.riddles.boardgame.visitor.SimpleBoardGameMoveDeserializer;
+import io.riddles.chess.io.ChessIORequest;
 import io.riddles.chess.io.ChessIORequestType;
 import io.riddles.chess.model.ChessState;
+import io.riddles.chess.transformer.ChessStateToIORequestTransformer;
 import io.riddles.chess.validator.ChessMoveValidator;
 import io.riddles.game.engine.Processor;
 import io.riddles.game.exception.InvalidMoveException;
@@ -27,8 +29,9 @@ public class ChessProcessor implements Processor<ChessState> {
 
     @Override
     public IORequest getRequest(ChessState state) {
-//        Todo: Implement
-        return null;
+
+        ChessStateToIORequestTransformer transformer = new ChessStateToIORequestTransformer();
+        return transformer.transform(state);
     }
 
     @Override

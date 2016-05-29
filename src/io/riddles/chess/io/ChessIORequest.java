@@ -1,6 +1,7 @@
 package io.riddles.chess.io;
 
 import io.riddles.boardgame.model.Coordinate;
+import io.riddles.chess.model.ChessPieceColor;
 import io.riddles.game.io.IORequest;
 import io.riddles.game.model.Traversible;
 import io.riddles.game.model.Visitor;
@@ -20,17 +21,22 @@ import java.util.Optional;
 public class ChessIORequest implements Traversible, IORequest {
 
     private ChessIORequestType type;
+    private ChessPieceColor color;
     private Optional<Coordinate> coordinate;
 
-    public ChessIORequest(ChessIORequestType type) {
+    public ChessIORequest(ChessPieceColor color, ChessIORequestType type) {
         coordinate = Optional.empty();
+        this.color = color;
         this.type = type;
     }
 
-    public ChessIORequest(ChessIORequestType type, Coordinate coordinate) {
+    public ChessIORequest(ChessPieceColor color, ChessIORequestType type, Coordinate coordinate) {
+        this.color = color;
         this.coordinate = Optional.of(coordinate);
         this.type = type;
     }
+
+    public ChessPieceColor getColor() { return color; }
 
     @Override
     public ChessIORequestType getType() {
