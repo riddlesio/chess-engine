@@ -7,8 +7,10 @@ class SquareBoardSpec extends Specification {
     def "size() should return the square root of the amount of fields passed to SquareBoard"() {
 
         given:
-            def fields = (1..count).collect { _ -> new Field() } as ArrayList<Field>
-            def board = new SquareBoard(fields)
+        List<Field> fields = Stub()
+        fields.size() >> count
+
+        def board = new SquareBoard(fields)
 
         expect:
         board.size() == result
