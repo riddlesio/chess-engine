@@ -10,7 +10,7 @@ package io.riddles.game.io;
  *
  * @author Niko
  */
-public class AbstractIOProvider {
+public abstract class AbstractIOProvider {
 
     private IOHandler handler;
 
@@ -18,5 +18,5 @@ public class AbstractIOProvider {
         this.handler = handler;
     }
 
-    public IOHandler getHandler() { return handler; }
+    protected IOHandler getHandler() { return handler; }
 }
