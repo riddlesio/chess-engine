@@ -1,5 +1,10 @@
 package io.riddles.game.engine;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 import io.riddles.chess.io.ChessIORequestType;
 import io.riddles.game.io.IORequest;
 import io.riddles.game.io.IOProvider;
@@ -30,6 +35,49 @@ public class SimpleGameLoop<State> implements GameLoop<State> {
         IORequest request;
         IOResponse response;
         State state = initialState;
+        
+        
+        String line = null;
+        BufferedReader bufferedReader = null;
+        
+        
+        try {
+			FileReader fileReader = new FileReader("C:\\workspace\\Moves\\1.txt");
+		
+            bufferedReader =  new BufferedReader(fileReader);
+              /*
+                while((line = bufferedReader.readLine()) != null) {
+                    System.out.println(line);
+                }
+			*/
+            
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
+        while (!processor.hasGameEnded(state)) {
+
+        	//System.out.println("loop");
+            
+            try {
+				while((line = bufferedReader.readLine()) != null) {
+				    System.out.println(line);			    
+				    state = processor.processInputTest(state, line);
+				}
+			} catch (Exception e) {
+				state = processor.processException(state, e);
+				e.printStackTrace();
+			}        	
+        	
+        	
+        }        
+        
+        /*
 
         while (!processor.hasGameEnded(state)) {
 
@@ -43,8 +91,12 @@ public class SimpleGameLoop<State> implements GameLoop<State> {
 
                 state = processor.processException(state, exception);
             }
+            
+            
         }
 
+        */
+        
         return state;
     }
 }

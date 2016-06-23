@@ -2,6 +2,7 @@ package io.riddles.boardgame.visitor;
 
 import io.riddles.boardgame.model.Coordinate;
 import io.riddles.boardgame.model.Move;
+import io.riddles.chess.model.ChessPieceType;
 import io.riddles.game.exception.InvalidInputException;
 
 import java.util.ArrayList;
@@ -20,11 +21,59 @@ public class SimpleBoardGameMoveDeserializer implements BoardGameMoveDeserialize
 
     public Move traverse(String input) throws InvalidInputException {
 
+    	//castling move
+    	if( input.trim().indexOf('-') >= 0  ){
+    		if( input.trim().compareTo("0-0") == 0 ){
+    		  boolean kingCastling = true;
+    		  return new Move(kingCastling);
+    		}
+    		if( input.trim().compareTo("0-0-0") == 0 ){
+    		  boolean kingCastling = false;
+    		  return new Move(kingCastling);				
+    		}
+    	}
+    	
+    	//promotion move
+    	if( input.trim().indexOf('=') >= 0  ){
+    		return this.visitPromotion(input);
+    	}
+    	
         String[] tokens = input.trim().split(" ");
 
         return this.visit(tokens);
     }
 
+    
+    private Move visitPromotion(String input) throws InvalidInputException {
+
+    	input = input.trim();
+        String[] tokensPromotion = input.trim().split("=");        
+    	
+        if (tokensPromotion.length != 2) {
+            throw new InvalidInputException("Incorrect promotion input");
+        }        
+        
+        ChessPieceType getType = null;
+        switch( tokensPromotion[1] ){
+          case "B": getType = ChessPieceType.BISHOP; break;
+          case "P": getType = ChessPieceType.PAWN; break;
+          case "R": getType = ChessPieceType.ROOK; break;
+          case "K": getType = ChessPieceType.KNIGHT; break;  
+          case "Q": getType = ChessPieceType.QUEEN;  break;         
+        }
+        
+        if( getType == null){
+        	throw new InvalidInputException("Incorrect promotion input");
+        }
+        
+        String[] tokens = tokensPromotion[0].trim().split(" ");        
+        Move getMove = visit(tokens);
+
+        return new Move(getMove.getFrom(),getMove.getTo(),getType);
+    }
+    
+    
+    
     private Move visit(String[] tokens) throws InvalidInputException {
 
         if (tokens.length != 2) {

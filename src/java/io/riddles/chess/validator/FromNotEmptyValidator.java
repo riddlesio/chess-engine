@@ -4,6 +4,7 @@ import io.riddles.boardgame.model.Board;
 import io.riddles.boardgame.model.Coordinate;
 import io.riddles.boardgame.model.Field;
 import io.riddles.boardgame.model.Move;
+import io.riddles.chess.model.ChessState;
 import io.riddles.game.validator.MoveValidator;
 
 /**
@@ -25,7 +26,7 @@ public class FromNotEmptyValidator implements MoveValidator {
     }
 
     @Override
-    public Boolean isValid(Move move, Board board) {
+    public Boolean isValid(Move move, Board board, ChessState state) {
 
         Coordinate from = move.getFrom();
 

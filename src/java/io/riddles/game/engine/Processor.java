@@ -48,4 +48,6 @@ public interface Processor<State> {
      * @throws Exception - When input cannot be converted to a move or the move is invalid
      */
     State processInput(State state, IOResponse input) throws Exception;
+
+	State processInputTest(State state, String line) throws Exception;
 }

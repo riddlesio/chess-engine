@@ -10,12 +10,18 @@ package io.riddles.boardgame.model;
  *
  * @author Niko
  */
-public abstract class Piece<PieceType, PieceColor> extends AbstractModel {
+public abstract class Piece<ChessPieceType, PieceColor> extends AbstractModel {
 
+	
+	public enum PieceColor{
+		BLACK,
+		WHITE
+	}
+	
     protected PieceColor color;
-    protected PieceType type;
+    protected ChessPieceType type;
 
-    public Piece(PieceType type, PieceColor color) {
+    public Piece(ChessPieceType type, PieceColor color) {
         this.type = type;
         this.color = color;
     }
@@ -24,15 +30,15 @@ public abstract class Piece<PieceType, PieceColor> extends AbstractModel {
         return this.color == color;
     }
 
-    public Boolean hasType(PieceType type) {
+    public Boolean hasType(ChessPieceType type) {
         return this.type == type;
     }
 
     public PieceColor getColor() {
-        return color;
+        return this.color;
     }
 
-    public PieceType getType() {
-        return type;
+    public ChessPieceType getType() {
+        return this.type;
     }
 }

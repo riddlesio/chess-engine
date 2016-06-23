@@ -12,6 +12,9 @@ package io.riddles.game.io;
  */
 public interface IOResponse {
 
+	
+	
+	
     IORequest getRequest();
     String getValue();
 }
