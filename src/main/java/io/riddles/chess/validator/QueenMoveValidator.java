@@ -1,0 +1,42 @@
+package io.riddles.chess.validator;
+
+import io.riddles.chess.move.ChessMove;
+import io.riddles.boardgame.model.ValidationResult;
+import io.riddles.chess.model.*;
+import io.riddles.game.validator.MoveValidator;
+
+/**
+ * ${PACKAGE_NAME}
+ *
+ * This file is a part of chess
+ *
+ * Copyright 2016 - present Riddles.io
+ * For license information see the LICENSE file in the project root
+ *
+ * @author Niko
+ */
+public class QueenMoveValidator extends ChessPieceMoveValidator implements MoveValidator<ChessState> {
+
+    @Override
+    public Boolean isApplicable(ChessMove move, ChessState state) {
+
+        return this.isMovedPieceOfType(move, state.getBoard(), ChessPieceType.QUEEN);
+    }
+
+    @Override
+    public ValidationResult isValid(ChessMove move, ChessState state) {
+
+        MoveValidator bishopMoveValidator = new BishopMoveValidator();
+        MoveValidator rookMoveValidator = new RookMoveValidator();
+
+        Boolean isValidBishopMove = bishopMoveValidator.isValid(move, state).isValid();
+        Boolean isValidRookMove = rookMoveValidator.isValid(move, state).isValid();
+
+        boolean isValid = isValidBishopMove || isValidRookMove;
+        if (isValid) {
+            return new ValidationResult(true, "");
+        }
+
+        return new ValidationResult(false, "The queen can only move horizontally, vertically or diagonally");
+    }
+}
