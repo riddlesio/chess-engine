@@ -5,6 +5,8 @@ import io.riddles.boardgame.model.ValidationResult;
 import io.riddles.chess.model.*;
 import io.riddles.game.validator.MoveValidator;
 
+import java.awt.*;
+
 /**
  * ${PACKAGE_NAME}
  *
@@ -24,13 +26,13 @@ public class KingMoveValidator extends ChessPieceMoveValidator implements MoveVa
     }
 
     @Override
-    public ValidationResult isValid(ChessMove move, ChessState state) {
+    public ValidationResult validate(ChessMove move, ChessState state) {
 
-        Coordinate from = move.getFrom();
-        Coordinate to = move.getTo();
+        Point from = move.getFrom();
+        Point to = move.getTo();
 
-        int deltaX = Math.abs(to.getX() - from.getX());
-        int deltaY = Math.abs(to.getY() - from.getY());
+        int deltaX = Math.abs(to.x - from.x);
+        int deltaY = Math.abs(to.y - from.y);
 
         boolean isValid = deltaX <= 1 && deltaY <= 1;
         if (isValid) {

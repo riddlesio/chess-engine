@@ -27,7 +27,7 @@ public class FromNotEmptyValidator implements MoveValidator<ChessState> {
     }
 
     @Override
-    public ValidationResult isValid(ChessMove move, ChessState state) {
+    public ValidationResult validate(ChessMove move, ChessState state) {
 
         Point from = move.getFrom();
         ChessBoard board = state.getBoard();

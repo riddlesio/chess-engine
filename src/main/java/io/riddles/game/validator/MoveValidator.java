@@ -17,5 +17,5 @@ public interface MoveValidator<S> {
 
     Boolean isApplicable(ChessMove move, S state);
 
-    ValidationResult isValid(ChessMove move, S state);
+    ValidationResult validate(ChessMove move, S state);
 }

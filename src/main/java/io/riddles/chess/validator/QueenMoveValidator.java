@@ -24,7 +24,7 @@ public class QueenMoveValidator extends ChessPieceMoveValidator implements MoveV
     }
 
     @Override
-    public ValidationResult isValid(ChessMove move, ChessState state) {
+    public ValidationResult validate(ChessMove move, ChessState state) {
 
         MoveValidator bishopMoveValidator = new BishopMoveValidator();
         MoveValidator rookMoveValidator = new RookMoveValidator();

@@ -1,5 +1,6 @@
 package io.riddles.chess.game;
 
+import io.riddles.chess.ChessPlayer;
 import io.riddles.chess.move.ChessMove;
 import io.riddles.chess.move.ChessMove.MoveTypes;
 import io.riddles.boardgame.visitor.BoardGameMoveDeserializer;
@@ -7,11 +8,12 @@ import io.riddles.boardgame.visitor.SimpleBoardGameMoveDeserializer;
 import io.riddles.chess.model.ChessState;
 import io.riddles.chess.transformer.ChessStateToIORequestTransformer;
 import io.riddles.chess.validator.ChessMoveValidator;
-import io.riddles.game.engine.Processor;
 import io.riddles.game.exception.InvalidMoveException;
 import io.riddles.game.io.IORequest;
 import io.riddles.game.io.IOResponse;
 import io.riddles.game.validator.MoveValidator;
+import io.riddles.javainterface.game.player.PlayerProvider;
+import io.riddles.javainterface.game.processor.PlayerResponseProcessor;
 
 /**
  * This class is the connects the Chess game with the encapsulating
@@ -23,7 +25,11 @@ import io.riddles.game.validator.MoveValidator;
  *
  * @author Niko van Meurs <niko@riddles.io>
  */
-public class ChessProcessor implements Processor<ChessState> {
+public class ChessProcessor extends PlayerResponseProcessor<ChessState, ChessPlayer> {
+
+    public ChessProcessor(PlayerProvider<ChessPlayer> playerProvider) {
+        super(playerProvider);
+    }
 
     @Override
     public IORequest getRequest(ChessState state) {

@@ -36,4 +36,5 @@ public final class ChessState extends AbstractState<ChessPlayerState> implements
     public int getPlayerId() {
         return playerId;
     }
+    public void setPlayerId(int id) { this.playerId = id; }
 }
