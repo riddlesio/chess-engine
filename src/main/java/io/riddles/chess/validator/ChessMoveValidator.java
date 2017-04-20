@@ -7,13 +7,12 @@ import io.riddles.chess.data.Piece;
 import io.riddles.chess.data.Piece.PieceColor;
 import io.riddles.chess.model.ChessPieceColor;
 import io.riddles.chess.model.ChessPieceType;
-import io.riddles.chess.model.ChessState;
+import io.riddles.chess.game.state.ChessState;
 import io.riddles.chess.move.ChessMove;
 import io.riddles.game.validator.MoveValidator;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Optional;
 
 /**
  * ${PACKAGE_NAME}

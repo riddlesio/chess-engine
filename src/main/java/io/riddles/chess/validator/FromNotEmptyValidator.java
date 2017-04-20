@@ -2,7 +2,7 @@ package io.riddles.chess.validator;
 
 import io.riddles.boardgame.model.*;
 import io.riddles.chess.data.ChessBoard;
-import io.riddles.chess.model.ChessState;
+import io.riddles.chess.game.state.ChessState;
 import io.riddles.chess.move.ChessMove;
 import io.riddles.game.validator.MoveValidator;
 

@@ -1,9 +1,10 @@
-package io.riddles.boardgame.visitor;
+package io.riddles.chess.game.move;
 
 import io.riddles.chess.move.ChessMove;
 import io.riddles.chess.model.ChessPieceType;
 import io.riddles.game.exception.InvalidInputException;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  *
  * @author Niko
  */
-public class SimpleBoardGameMoveDeserializer implements BoardGameMoveDeserializer {
+public class ChessMoveDeserializer {
 
     public ChessMove traverse(String input) throws InvalidInputException {
 
@@ -79,20 +80,20 @@ public class SimpleBoardGameMoveDeserializer implements BoardGameMoveDeserialize
             throw new InvalidInputException("Input contains more than two tokens");
         }
 
-        ArrayList<Coordinate> coordinates = new ArrayList<>();
+        ArrayList<Point> coordinates = new ArrayList<>();
 
         for (String token : tokens) {
-            Coordinate coordinate = this.visit(token);
+            Point coordinate = this.visit(token);
             coordinates.add(coordinate);
         }
 
-        Coordinate from = coordinates.get(0);
-        Coordinate to   = coordinates.get(1);
+        Point from = coordinates.get(0);
+        Point to   = coordinates.get(1);
 
         return new ChessMove(from, to);
     }
 
-    private Coordinate visit(String token) throws InvalidInputException {
+    private Point visit(String token) throws InvalidInputException {
 
         if (!token.matches("^[A-Za-z][0-9]$")) {
             throw new InvalidInputException("Token has invalid format");
@@ -107,7 +108,7 @@ public class SimpleBoardGameMoveDeserializer implements BoardGameMoveDeserialize
         Integer x = digits.get(0);
         Integer y = digits.get(1);
 
-        return new Coordinate(x, y);
+        return new Point(x, y);
     }
 
     private Integer visit(Character c) {

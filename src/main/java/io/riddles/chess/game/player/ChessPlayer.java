@@ -1,4 +1,4 @@
-package io.riddles.chess;
+package io.riddles.chess.game.player;
 
 import io.riddles.javainterface.game.player.AbstractPlayer;
 

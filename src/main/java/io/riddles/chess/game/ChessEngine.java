@@ -1,7 +1,9 @@
 package io.riddles.chess.game;
 
-import io.riddles.chess.ChessPlayer;
-import io.riddles.chess.model.ChessState;
+import io.riddles.chess.data.ChessBoard;
+import io.riddles.chess.game.player.ChessPlayer;
+import io.riddles.chess.game.state.ChessState;
+import io.riddles.chess.state.ChessPlayerState;
 import io.riddles.javainterface.configuration.Configuration;
 import io.riddles.javainterface.engine.AbstractEngine;
 import io.riddles.javainterface.engine.GameLoopInterface;
@@ -91,18 +93,13 @@ public class ChessEngine extends AbstractEngine<ChessProcessor, ChessPlayer, Che
     @Override
     protected ChessState getInitialState() {
         ArrayList<ChessPlayerState> playerStates = new ArrayList<>();
-        Shape shape = shapeFactory.getNext();
+        ChessBoard board = new ChessBoard(configuration.getInt("fieldWidth"), (configuration.getInt("fieldHeight")));
 
         for (ChessPlayer player : playerProvider.getPlayers()) {
             ChessPlayerState playerState = new ChessPlayerState(player.getId());
-            ChessBoard board = new ChessBoard(configuration.getInt("fieldWidth"), (configuration.getInt("fieldHeight")));
-            playerState.setBoard(board);
-            playerState.setCurrentShape(shape.clone());
             playerStates.add(playerState);
         }
-        ChessState state = new ChessState(null, playerStates, 0, 0);
-
-        state.setNextShape(shapeFactory.getNext());
+        ChessState state = new ChessState(null, playerStates, 0);
         return state;
     }
 }

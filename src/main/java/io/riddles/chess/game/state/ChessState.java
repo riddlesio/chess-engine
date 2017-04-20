@@ -1,14 +1,11 @@
-package io.riddles.chess.model;
+package io.riddles.chess.game.state;
 
 import io.riddles.chess.data.ChessBoard;
-import io.riddles.chess.move.ChessMove;
 import io.riddles.chess.state.ChessPlayerState;
-import io.riddles.javainterface.game.data.Board;
 import io.riddles.javainterface.game.player.PlayerBound;
 import io.riddles.javainterface.game.state.AbstractState;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 /**
  * ${PACKAGE_NAME}

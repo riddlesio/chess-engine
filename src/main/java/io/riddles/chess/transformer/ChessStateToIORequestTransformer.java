@@ -7,7 +7,7 @@ import io.riddles.chess.io.ChessIORequest;
 import io.riddles.chess.io.ChessIORequestType;
 import io.riddles.chess.logic.ChessPieceLogic;
 import io.riddles.chess.model.ChessPieceColor;
-import io.riddles.chess.model.ChessState;
+import io.riddles.chess.game.state.ChessState;
 import io.riddles.chess.move.ChessMove;
 import io.riddles.game.transformer.Transformer;
 

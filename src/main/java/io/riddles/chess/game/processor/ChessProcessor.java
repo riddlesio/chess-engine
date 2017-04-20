@@ -1,10 +1,10 @@
-package io.riddles.chess.processor;
+package io.riddles.chess.game.processor;
 
 import java.util.ArrayList;
 
-import io.riddles.chess.ChessPlayer;
+import io.riddles.chess.game.player.ChessPlayer;
 import io.riddles.chess.data.ChessBoard;
-import io.riddles.chess.model.ChessState;
+import io.riddles.chess.game.state.ChessState;
 import io.riddles.chess.move.ActionType;
 import io.riddles.chess.move.ChessMove;
 import io.riddles.chess.move.ChessMoveDeserializer;

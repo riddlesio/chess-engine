@@ -3,6 +3,7 @@ package io.riddles.chess.visitor;
 import io.riddles.boardgame.model.Field;
 import io.riddles.chess.data.Piece;
 import io.riddles.boardgame.model.SquareBoard;
+import io.riddles.chess.game.state.ChessState;
 import io.riddles.chess.model.*;
 
 import java.util.ArrayList;

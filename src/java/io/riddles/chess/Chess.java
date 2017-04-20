@@ -1,14 +1,10 @@
 package io.riddles.chess;
 
 import io.riddles.chess.game.ChessEngine;
-import io.riddles.chess.game.state.ChessState;
-import io.riddles.javainterface.game.player.PlayerProvider;
-import io.riddles.javainterface.io.IOHandler;
 
-public class Chess {
+public class giChess {
 
     public static void main(String[] args) throws Exception {
-
         ChessEngine engine;
         engine = new ChessEngine(new PlayerProvider<>(), new IOHandler());
 
