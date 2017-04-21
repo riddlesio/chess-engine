@@ -8,8 +8,7 @@ import io.riddles.chess.game.state.ChessState;
 import io.riddles.chess.move.ActionType;
 import io.riddles.chess.move.ChessMove;
 import io.riddles.chess.move.ChessMoveDeserializer;
-import io.riddles.chess.state.ChessPlayerState;
-import io.riddles.chess.validator.ChessMoveValidator;
+import io.riddles.chess.game.state.ChessPlayerState;
 import io.riddles.javainterface.engine.AbstractEngine;
 import io.riddles.javainterface.game.player.PlayerProvider;
 import io.riddles.javainterface.game.processor.PlayerResponseProcessor;
@@ -37,34 +36,12 @@ public class ChessProcessor extends PlayerResponseProcessor<ChessState, ChessPla
         ChessState nextState = new ChessState(state, nextPlayerStates, roundNumber);
         nextState.setPlayerId(input.getPlayerId());
 
-        System.out.println("testing input");
-
-        ChessBoard board = state.getBoard();
-
         ChessMoveDeserializer moveDeserializer = new ChessMoveDeserializer();
         ChessMove move = moveDeserializer.traverse(input.getValue());
+        ChessPlayerState playerState = getActivePlayerState(nextPlayerStates, input.getPlayerId());
+        playerState.setMove(move);
 
-        //test input
-        if(  move.moveType == ChessMove.MoveTypes.Regular  ){
-            System.out.println(move.getFrom().getX());
-            System.out.println(move.getFrom().getY());
-
-            System.out.println(move.getTo().getX());
-            System.out.println(move.getTo().getY());
-        }
-
-
-        if(  move.moveType == ChessMove.MoveTypes.Promotion  ){
-            System.out.println(move.getFrom().getX());
-            System.out.println(move.getFrom().getY());
-
-            System.out.println(move.getTo().getX());
-            System.out.println(move.getTo().getY());
-            System.out.println(move.getPromotionType());
-        }
-
-
-        if(  move.moveType == ChessMove.MoveTypes.Castling  ){
+        if(move.moveType == ChessMove.MoveTypes.Castling  ){
             if( move.isKingCastle() ){
                 System.out.println("King side Castling");
             } else {
@@ -76,6 +53,12 @@ public class ChessProcessor extends PlayerResponseProcessor<ChessState, ChessPla
         if (move.getException() != null) {
             System.out.println("EXCEPTION '" + input.getValue() + "' " + move.getException().toString());
         }
+
+        ChessLogic logic = new ChessLogic();
+        logic.executeMove(nextState, playerState);
+
+        nextState.getBoard().dump();
+
         nextState.setPlayerstates((ArrayList)nextPlayerStates);
         return nextState;
     }

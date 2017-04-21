@@ -21,7 +21,6 @@
 package io.riddles.chess.game.state;
 
 import io.riddles.chess.move.ChessMove;
-import io.riddles.chess.state.ChessPlayerState;
 import io.riddles.javainterface.game.state.AbstractStateSerializer;
 import org.json.JSONObject;
 

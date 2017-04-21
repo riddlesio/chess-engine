@@ -1,7 +1,6 @@
 package io.riddles.chess.game.state;
 
 import io.riddles.chess.data.ChessBoard;
-import io.riddles.chess.state.ChessPlayerState;
 import io.riddles.javainterface.game.player.PlayerBound;
 import io.riddles.javainterface.game.state.AbstractState;
 
@@ -24,9 +23,13 @@ public final class ChessState extends AbstractState<ChessPlayerState> implements
 
     public ChessState(ChessState previousState, ArrayList<ChessPlayerState> playerStates, int roundNumber) {
         super(previousState, playerStates, roundNumber);
-        this.board = new ChessBoard(previousState.getBoard());
+        if (previousState != null && previousState.getBoard() != null) {
+            this.board = new ChessBoard(previousState.getBoard());
+        } else {
+        }
     }
 
+    public void setBoard(ChessBoard board) { this.board = board; }
     public ChessBoard getBoard() { return board; }
 
     @Override

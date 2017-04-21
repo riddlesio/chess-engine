@@ -54,13 +54,17 @@ public class ChessMoveDeserializer implements Deserializer<ChessMove> {
         input = input.replace(',', ' ');
         String[] split = input.split(" ");
 
-        MoveType type = visitAssessment(split[0]);
-        Point p = null;
-        if (type == MoveType.MOVE) {
-            p = new Point(Integer.parseInt(split[1]), Integer.parseInt(split[2]));
+        if (split.length == 2) {
+            MoveType type = visitAssessment(split[0]);
+            if (type == MoveType.MOVE) {
+                String move = split[1];
+                Point from = parseCoordinate(move.substring(0,2));
+                Point to = parseCoordinate(move.substring(2,4));
+                return new ChessMove(from, to);
+            }
         }
 
-        return new ChessMove(new Point(), new Point());
+        throw new InvalidInputException("Failed to parse move");
     }
 
     private MoveType visitAssessment(String input) throws InvalidInputException {
@@ -70,5 +74,12 @@ public class ChessMoveDeserializer implements Deserializer<ChessMove> {
             default:
                 throw new InvalidInputException("Move isn't valid");
         }
+    }
+
+    private Point parseCoordinate(String s) {
+        String columnString = s.substring(0,1);
+        int row = 8-Integer.parseInt(s.substring(1,2));
+        int column = columnString.charAt(0)-97;
+        return new Point(column, row);
     }
 }

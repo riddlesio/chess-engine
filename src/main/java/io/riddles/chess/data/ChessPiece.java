@@ -16,10 +16,17 @@ import io.riddles.chess.model.ChessPieceType;
 public class ChessPiece {
     ChessPieceType type;
     ChessPieceColor color;
+    private boolean hasMoved;
 
     public ChessPiece(ChessPieceType type, ChessPieceColor color) {
         this.type = type;
         this.color = color;
+    }
+
+    public ChessPiece(ChessPiece piece) {
+        this.hasMoved = piece.hasMoved();
+        this.color = piece.getColor();
+        this.type = piece.getType();
     }
 
     public Boolean hasColor(ChessPieceColor color) {
@@ -37,4 +44,7 @@ public class ChessPiece {
     public ChessPieceType getType() {
         return this.type;
     }
+
+    public void setMoved() { this.hasMoved = true; }
+    public boolean hasMoved() { return this.hasMoved; }
 }

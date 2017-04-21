@@ -23,11 +23,27 @@ import java.util.ArrayList;
  */
 public final class ChessMoveValidator implements MoveValidator<ChessState> {
 
+    private ArrayList<MoveValidator> validators;
+
     public ChessMoveValidator() {
+
+        ArrayList<MoveValidator> validators = new ArrayList<>();
+
+        validators.add(new FromNotEmptyValidator());
+        validators.add(new ChessPieceColorValidator());
+        validators.add(new BishopMoveValidator());
+        validators.add(new KingMoveValidator());
+        validators.add(new KnightMoveValidator());
+        validators.add(new PawnMoveValidator());
+        validators.add(new QueenMoveValidator());
+        validators.add(new RookMoveValidator());
+
+        this.validators = validators;
     }
 
     @Override
     public Boolean isApplicable(ChessMove move, ChessState state) {
+
         return true;
     }
 
@@ -35,52 +51,30 @@ public final class ChessMoveValidator implements MoveValidator<ChessState> {
     public ValidationResult validate(ChessMove move, ChessState state) {
         ChessBoard board = state.getBoard();
 
-    	//first check if the move is valid
-    	MoveValidator notEmpty = new FromNotEmptyValidator();
-        if (!notEmpty.validate(move, board).isValid()) {
-            return new ValidationResult(false, "From field is empty.");
-        }    	
-    	
         //get the piece at the from location
         Point from = move.getFrom();
         ChessPiece fromPiece = board.getFieldAt(from);
 
-        ChessPieceColor moveColor = ChessPieceColor.WHITE;
-        if (state.getRoundNumber() > 0 && state.getRoundNumber() % 2 == 0){
-            moveColor = ChessPieceColor.BLACK;
+        boolean result = true;
+        for (MoveValidator validator : validators) {
+            if (validator.isApplicable(move, state)) {
+                ValidationResult vr = validator.validate(move, state);
+                if (!vr.isValid()) {
+                    return vr;
+                }
+            }
         }
-        //check if we move a piece of the current player
-        if ( moveColor != fromPiece.getColor() ){
-        	return new ValidationResult(false, "Move isn't the right color piece.");
-        }
-        ChessPieceType pieceType = fromPiece.getType();
-        MoveValidator validator = null;
-        switch( pieceType ){
-          case BISHOP: 
-        	  validator = new BishopMoveValidator();
-        	  break;
-          case ROOK: 
-        	  validator = new RookMoveValidator();
-              break;
-          case KNIGHT: 
-        	  validator = new KnightMoveValidator();
-              break;
-          case PAWN: 
-        	  validator = new PawnMoveValidator();
-              break;
-          case QUEEN: 
-        	  validator = new QueenMoveValidator();
-              break;
-          case KING: 
-        	  validator = new KingMoveValidator();
-        	  break;
-        }
+
+
+        /*
         if (validator != null) {
             ValidationResult result = validator.validate(move, state);
             if (!result.isValid()) {
                 return result;
             }
         }
-        return new ValidationResult(false, "Move could not be validated.");
+        */
+        return new ValidationResult(true, "Nice");
     }
+
 }

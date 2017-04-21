@@ -33,23 +33,29 @@ public class PawnMoveValidator extends ChessPieceMoveValidator implements MoveVa
         Point from = move.getFrom();
         Point to = move.getTo();
 
-        int deltaX = Math.abs(to.x - from.x);
-        int deltaY = Math.abs(to.y - from.y);
+        int deltaX = to.x - from.x;
+        int deltaY = to.y - from.y;
 
         ChessPiece chessPiece = (ChessPiece) state.getBoard().getFieldAt(from);
         ChessPieceColor pieceColor = chessPiece.getColor();
 
         boolean isValid;
         if (ChessPieceColor.BLACK == pieceColor) {
-            isValid = deltaX == 0 && deltaY == -1;
+            if (!chessPiece.hasMoved())
+                isValid = deltaX == 0 && (deltaY == 1 || deltaY == 2);
+            else
+                isValid = deltaX == 0 && deltaY == 1;
         } else {
-            isValid = deltaX == 0 && deltaY == 1;
+            if (!chessPiece.hasMoved())
+                isValid = deltaX == 0 && (deltaY == -1 || deltaY == -2);
+            else
+                isValid = deltaX == 0 && deltaY == -1;
         }
 
         if (isValid) {
             return new ValidationResult(true, "");
         }
 
-        return new ValidationResult(false, "The king can only move a distance of one square in any direction");
+        return new ValidationResult(false, "The pawn can only move forward to the unoccupied square immediately in front of it on the same file, or on its first move it can advance two squares along the same file.");
     }
 }

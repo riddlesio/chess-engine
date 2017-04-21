@@ -3,12 +3,14 @@ package io.riddles.chess.engine;
 import io.riddles.chess.data.ChessBoard;
 import io.riddles.chess.game.ChessSerializer;
 import io.riddles.chess.game.player.ChessPlayer;
+import io.riddles.chess.game.processor.ChessLogic;
 import io.riddles.chess.game.processor.ChessProcessor;
 import io.riddles.chess.game.state.ChessState;
-import io.riddles.chess.state.ChessPlayerState;
+import io.riddles.chess.game.state.ChessPlayerState;
 import io.riddles.javainterface.configuration.Configuration;
 import io.riddles.javainterface.engine.AbstractEngine;
 import io.riddles.javainterface.engine.GameLoopInterface;
+import io.riddles.javainterface.engine.TurnBasedGameLoop;
 import io.riddles.javainterface.exception.TerminalException;
 import io.riddles.javainterface.game.player.PlayerProvider;
 import io.riddles.javainterface.io.IOHandler;
@@ -62,7 +64,8 @@ public class ChessEngine extends AbstractEngine<ChessProcessor, ChessPlayer, Che
 
     @Override
     protected GameLoopInterface createGameLoop() {
-        return new io.riddles.javainterface.engine.SimpleGameLoop();
+
+        return new TurnBasedGameLoop<ChessState>();
     }
 
     @Override
@@ -79,6 +82,7 @@ public class ChessEngine extends AbstractEngine<ChessProcessor, ChessPlayer, Che
         player.sendSetting("max_rounds", configuration.getInt("maxRounds"));
         player.sendSetting("player_names", playerNames);
         player.sendSetting("your_bot", player.getName());
+        player.sendSetting("your_color", new ChessLogic().getPlayerColor(player.getId()).toString().toLowerCase());
     }
 
 
@@ -99,20 +103,23 @@ public class ChessEngine extends AbstractEngine<ChessProcessor, ChessPlayer, Che
         ArrayList<ChessPlayerState> playerStates = new ArrayList<>();
         ChessBoard board = new ChessBoard(configuration.getInt("fieldWidth"), (configuration.getInt("fieldHeight")));
         board.setFieldsFromString(
-                "R,N,B,K,Q,B,N,R," +
+                "R,N,B,Q,K,B,N,R," +
                 "P,P,P,P,P,P,P,P," +
                 ".,.,.,.,.,.,.,.," +
                 ".,.,.,.,.,.,.,.," +
                 ".,.,.,.,.,.,.,.," +
                 ".,.,.,.,.,.,.,.," +
                 "p,p,p,p,p,p,p,p," +
-                "r,n,b,k,q,b,n,r," );
+                "r,n,b,q,k,b,n,r" );
 
         for (ChessPlayer player : playerProvider.getPlayers()) {
             ChessPlayerState playerState = new ChessPlayerState(player.getId());
             playerStates.add(playerState);
         }
+
         ChessState state = new ChessState(null, playerStates, 0);
+        state.setBoard(board);
+
         return state;
     }
 }

@@ -4,13 +4,13 @@ import io.riddles.chess.model.ChessPieceColor;
 import io.riddles.chess.model.ChessPieceType;
 import io.riddles.javainterface.game.data.Board;
 
+import java.awt.*;
+
 
 /**
  * Created by joost on 4/18/17.
  */
 public class ChessBoard extends Board<ChessPiece>{
-    protected int width = 19;
-    protected int height = 19;
     public static final String EMPTY_FIELD = ".";
 
 
@@ -33,6 +33,7 @@ public class ChessBoard extends Board<ChessPiece>{
         super(board.getWidth(), board.getHeight());
         fields = new ChessPiece[width][height];
         clear();
+        /* TODO: Clone better. */
         setFieldsFromString(board.toString());
     }
 
@@ -96,36 +97,38 @@ public class ChessBoard extends Board<ChessPiece>{
     }
 
     public String getStringFromFrield(ChessPiece p) {
-        ChessPieceType type = p.getType();
-        if (p.getColor() == ChessPieceColor.BLACK) {
-            switch (p.getType()) {
-                case ROOK:
-                    return "R";
-                case KNIGHT:
-                    return "N";
-                case BISHOP:
-                    return "B";
-                case KING:
-                    return "K";
-                case QUEEN:
-                    return "Q";
-                case PAWN:
-                    return "P";
-            }
-        } else {
-            switch (p.getType()) {
-                case ROOK:
-                    return "r";
-                case KNIGHT:
-                    return "n";
-                case BISHOP:
-                    return "b";
-                case KING:
-                    return "k";
-                case QUEEN:
-                    return "q";
-                case PAWN:
-                    return "p";
+        if (p != null) {
+            ChessPieceType type = p.getType();
+            if (p.getColor() == ChessPieceColor.BLACK) {
+                switch (p.getType()) {
+                    case ROOK:
+                        return "R";
+                    case KNIGHT:
+                        return "N";
+                    case BISHOP:
+                        return "B";
+                    case KING:
+                        return "K";
+                    case QUEEN:
+                        return "Q";
+                    case PAWN:
+                        return "P";
+                }
+            } else {
+                switch (p.getType()) {
+                    case ROOK:
+                        return "r";
+                    case KNIGHT:
+                        return "n";
+                    case BISHOP:
+                        return "b";
+                    case KING:
+                        return "k";
+                    case QUEEN:
+                        return "q";
+                    case PAWN:
+                        return "p";
+                }
             }
         }
         return ".";
@@ -143,5 +146,35 @@ public class ChessBoard extends Board<ChessPiece>{
             }
         }
         return s;
+    }
+
+    public boolean move(Point from, Point to) {
+        if (fields[to.x][to.y] == null) {
+            fields[to.x][to.y] = fields[from.x][from.y];
+            fields[from.x][from.y] = null;
+            return true;
+        }
+        return false;
+    }
+
+    @Override /* TODO: Logic is cumbersome */
+    public ChessPiece getFieldAt(Point point) {
+        if (point.x >= 0 && point.x < this.width && point.y >= 0 && point.y < this.height) {
+            if (fields[point.x][point.y] != null) {
+                return fields[point.x][point.y];
+            }
+        }
+        return null;
+
+    }
+
+    @Override
+    public void dump() {
+        for(int y = 0; y < this.height; y++) {
+            for(int x = 0; x < this.width; x++) {
+                System.out.print(getStringFromFrield(fields[x][y]));
+            }
+            System.out.print("\n");
+        }
     }
 }
