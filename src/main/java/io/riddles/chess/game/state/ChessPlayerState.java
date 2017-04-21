@@ -1,4 +1,4 @@
-package io.riddles.chess.state;
+package io.riddles.chess.game.state;
 
 import io.riddles.chess.move.ChessMove;
 import io.riddles.javainterface.game.state.AbstractPlayerState;
