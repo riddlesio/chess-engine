@@ -1,6 +1,6 @@
 package io.riddles.chess;
 
-import io.riddles.chess.game.ChessEngine;
+import io.riddles.chess.engine.ChessEngine;
 import io.riddles.chess.game.state.ChessState;
 import io.riddles.javainterface.game.player.PlayerProvider;
 import io.riddles.javainterface.io.IOHandler;

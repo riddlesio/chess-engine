@@ -1,10 +1,9 @@
 package io.riddles.chess.validator;
 
 import io.riddles.chess.game.state.ChessState;
+import io.riddles.chess.model.ChessPieceType;
 import io.riddles.chess.move.ChessMove;
 import io.riddles.chess.model.ValidationResult;
-import io.riddles.chess.model.*;
-import io.riddles.game.validator.MoveValidator;
 
 import java.awt.*;
 

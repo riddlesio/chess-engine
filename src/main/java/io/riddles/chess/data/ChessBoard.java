@@ -9,7 +9,6 @@ import io.riddles.javainterface.game.data.Board;
  * Created by joost on 4/18/17.
  */
 public class ChessBoard extends Board<ChessPiece>{
-    protected ChessPiece[][] field;
     protected int width = 19;
     protected int height = 19;
     public static final String EMPTY_FIELD = ".";
@@ -18,21 +17,21 @@ public class ChessBoard extends Board<ChessPiece>{
     public ChessBoard(int width, int height) {
         super(width, height);
 
-        field = new ChessPiece[width][height];
+        fields = new ChessPiece[width][height];
         clear();
     }
 
     public ChessBoard(int width, int height, String initialBoard) {
         super(width, height);
 
-        field = new ChessPiece[width][height];
+        fields = new ChessPiece[width][height];
         clear();
         setFieldsFromString(initialBoard);
     }
 
     public ChessBoard(ChessBoard board) {
         super(board.getWidth(), board.getHeight());
-        field = new ChessPiece[width][height];
+        fields = new ChessPiece[width][height];
         clear();
         setFieldsFromString(board.toString());
     }
@@ -41,7 +40,7 @@ public class ChessBoard extends Board<ChessPiece>{
     public void clear() {
         for(int y = 0; y < this.height; y++) {
             for(int x = 0; x < this.width; x++) {
-                field[x][y] = null;
+                fields[x][y] = null;
             }
         }
     }
@@ -50,7 +49,7 @@ public class ChessBoard extends Board<ChessPiece>{
         String[] split = input.split(",");
         int x = 0;
         int y = 0;
-
+        this.fields = new ChessPiece[width][height];
         for(int c = 0; c < split.length; c++) {
             String fieldString = split[c];
             this.fields[x][y] = this.fieldFromString(fieldString);

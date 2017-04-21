@@ -5,7 +5,6 @@ import io.riddles.chess.data.ChessPiece;
 import io.riddles.chess.game.state.ChessState;
 import io.riddles.chess.model.ValidationResult;
 import io.riddles.chess.move.ChessMove;
-import io.riddles.game.validator.MoveValidator;
 
 import java.awt.*;
 
@@ -19,11 +18,10 @@ import java.awt.*;
  *
  * @author Niko
  */
-public class FromNotEmptyValidator implements MoveValidator<ChessState> {
+public class FromNotEmptyValidator extends ChessPieceMoveValidator implements MoveValidator<ChessState> {
 
     @Override
     public Boolean isApplicable(ChessMove move, ChessState state) {
-
         return true;
     }
 

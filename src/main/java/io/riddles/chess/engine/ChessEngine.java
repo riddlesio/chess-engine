@@ -1,6 +1,7 @@
-package io.riddles.chess.game;
+package io.riddles.chess.engine;
 
 import io.riddles.chess.data.ChessBoard;
+import io.riddles.chess.game.ChessSerializer;
 import io.riddles.chess.game.player.ChessPlayer;
 import io.riddles.chess.game.processor.ChessProcessor;
 import io.riddles.chess.game.state.ChessState;
@@ -98,14 +99,14 @@ public class ChessEngine extends AbstractEngine<ChessProcessor, ChessPlayer, Che
         ArrayList<ChessPlayerState> playerStates = new ArrayList<>();
         ChessBoard board = new ChessBoard(configuration.getInt("fieldWidth"), (configuration.getInt("fieldHeight")));
         board.setFieldsFromString(
-                "RNBKQBNR" +
-                "PPPPPPPP" +
-                "........" +
-                "........" +
-                "........" +
-                "........" +
-                "pppppppp" +
-                "rnbkqbnr" );
+                "R,N,B,K,Q,B,N,R," +
+                "P,P,P,P,P,P,P,P," +
+                ".,.,.,.,.,.,.,.," +
+                ".,.,.,.,.,.,.,.," +
+                ".,.,.,.,.,.,.,.," +
+                ".,.,.,.,.,.,.,.," +
+                "p,p,p,p,p,p,p,p," +
+                "r,n,b,k,q,b,n,r," );
 
         for (ChessPlayer player : playerProvider.getPlayers()) {
             ChessPlayerState playerState = new ChessPlayerState(player.getId());

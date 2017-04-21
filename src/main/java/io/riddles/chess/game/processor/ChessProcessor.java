@@ -10,7 +10,6 @@ import io.riddles.chess.move.ChessMove;
 import io.riddles.chess.move.ChessMoveDeserializer;
 import io.riddles.chess.state.ChessPlayerState;
 import io.riddles.chess.validator.ChessMoveValidator;
-import io.riddles.game.validator.MoveValidator;
 import io.riddles.javainterface.engine.AbstractEngine;
 import io.riddles.javainterface.game.player.PlayerProvider;
 import io.riddles.javainterface.game.processor.PlayerResponseProcessor;
@@ -39,7 +38,6 @@ public class ChessProcessor extends PlayerResponseProcessor<ChessState, ChessPla
         nextState.setPlayerId(input.getPlayerId());
 
         System.out.println("testing input");
-        MoveValidator validator = new ChessMoveValidator();
 
         ChessBoard board = state.getBoard();
 
