@@ -1,8 +1,9 @@
 package io.riddles.chess.validator;
 
+import io.riddles.chess.data.ChessPiece;
 import io.riddles.chess.game.state.ChessState;
 import io.riddles.chess.move.ChessMove;
-import io.riddles.boardgame.model.ValidationResult;
+import io.riddles.chess.model.ValidationResult;
 import io.riddles.chess.model.*;
 import io.riddles.game.validator.MoveValidator;
 
@@ -35,7 +36,7 @@ public class PawnMoveValidator extends ChessPieceMoveValidator implements MoveVa
         int deltaX = Math.abs(to.x - from.x);
         int deltaY = Math.abs(to.y - from.y);
 
-        ChessPiece chessPiece = (ChessPiece) state.getBoard().getFieldAt(from).getPiece().get();
+        ChessPiece chessPiece = (ChessPiece) state.getBoard().getFieldAt(from);
         ChessPieceColor pieceColor = chessPiece.getColor();
 
         boolean isValid;

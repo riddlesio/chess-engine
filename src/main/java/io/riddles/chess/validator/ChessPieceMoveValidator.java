@@ -1,11 +1,9 @@
 package io.riddles.chess.validator;
 
-import io.riddles.boardgame.logic.PieceLogic;
-import io.riddles.chess.model.ChessPieceColor;
+import io.riddles.chess.data.ChessBoard;
+import io.riddles.chess.data.ChessPiece;
 import io.riddles.chess.model.ChessPieceType;
-
-import java.awt.*;
-import java.util.Optional;
+import io.riddles.chess.move.ChessMove;
 
 /**
  * ${PACKAGE_NAME}
@@ -19,10 +17,9 @@ import java.util.Optional;
  */
 public abstract class ChessPieceMoveValidator {
 
-    private PieceLogic<ChessPieceType, ChessPieceColor> logic;
 
-    ChessPieceMoveValidator() {
-        logic = new PieceLogic<>();
+    protected Boolean isMovedPieceOfType(ChessMove move, ChessBoard board, ChessPieceType pieceType) {
+        ChessPiece piece = board.getFieldAt(move.getFrom());
+        return piece.hasType(pieceType);
     }
-
 }

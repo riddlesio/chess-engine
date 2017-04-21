@@ -1,8 +1,9 @@
 package io.riddles.chess.validator;
 
-import io.riddles.boardgame.model.*;
 import io.riddles.chess.data.ChessBoard;
+import io.riddles.chess.data.ChessPiece;
 import io.riddles.chess.game.state.ChessState;
+import io.riddles.chess.model.ValidationResult;
 import io.riddles.chess.move.ChessMove;
 import io.riddles.game.validator.MoveValidator;
 
@@ -31,13 +32,9 @@ public class FromNotEmptyValidator implements MoveValidator<ChessState> {
 
         Point from = move.getFrom();
         ChessBoard board = state.getBoard();
-        if (board != null) {
-            if (state.getBoard())
-        }
+        ChessPiece piece = board.getFieldAt(from);
 
-        Field field = state.getBoard().getFieldAt(from);
-
-        boolean isValid = field.getPiece().map(piece -> true).orElse(false);
+        boolean isValid = piece != null;
         if (isValid) {
             return new ValidationResult(true, "");
         }

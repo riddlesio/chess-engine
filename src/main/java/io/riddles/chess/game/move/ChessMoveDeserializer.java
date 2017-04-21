@@ -2,7 +2,7 @@ package io.riddles.chess.game.move;
 
 import io.riddles.chess.move.ChessMove;
 import io.riddles.chess.model.ChessPieceType;
-import io.riddles.game.exception.InvalidInputException;
+import io.riddles.javainterface.exception.InvalidInputException;
 
 import java.awt.*;
 import java.util.ArrayList;

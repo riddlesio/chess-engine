@@ -19,10 +19,9 @@
 
 package io.riddles.chess.game;
 
-import io.riddles.chess.game.state.ConnectfourStateSerializer;
+import io.riddles.chess.game.state.ChessStateSerializer;
 import io.riddles.chess.game.processor.ChessProcessor;
 import io.riddles.chess.game.state.ChessState;
-import io.riddles.chess.visitor.ChessStateSerializer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

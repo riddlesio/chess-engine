@@ -1,7 +1,7 @@
 package io.riddles.game.validator;
 
 import io.riddles.chess.move.ChessMove;
-import io.riddles.boardgame.model.ValidationResult;
+import io.riddles.chess.model.ValidationResult;
 
 /**
  * ${PACKAGE_NAME}

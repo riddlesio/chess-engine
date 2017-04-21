@@ -1,4 +1,4 @@
-package io.riddles.boardgame.model;
+package io.riddles.chess.model;
 
 /**
  * Created by joost on 4/18/17.

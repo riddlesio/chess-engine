@@ -19,9 +19,11 @@
 
 package io.riddles.chess.move;
 
-import io.riddles.go.game.board.Point;
+import io.riddles.chess.game.move.MoveType;
 import io.riddles.javainterface.exception.InvalidInputException;
 import io.riddles.javainterface.serialize.Deserializer;
+
+import java.awt.*;
 
 /**
  * io.riddles.go.game.move.GoMoveDeserializer - Created on 6/27/16
@@ -42,10 +44,8 @@ public class ChessMoveDeserializer implements Deserializer<ChessMove> {
         try {
             return visitMove(string);
         } catch (InvalidInputException ex) {
-            //this.player.sendWarning(ex.getMessage()); TODO: This moves to TurnBasedGameLoop
             return new ChessMove(ex);
         } catch (Exception ex) {
-            //this.player.sendWarning("Failed to parse move"); TODO: This moves to TurnBasedGameLoop
             return new ChessMove(new InvalidInputException("Failed to parse move"));
         }
     }
@@ -56,19 +56,17 @@ public class ChessMoveDeserializer implements Deserializer<ChessMove> {
 
         MoveType type = visitAssessment(split[0]);
         Point p = null;
-        if (type == MoveType.PLACE) {
+        if (type == MoveType.MOVE) {
             p = new Point(Integer.parseInt(split[1]), Integer.parseInt(split[2]));
         }
 
-        return new GoMove(type, p);
+        return new ChessMove(new Point(), new Point());
     }
 
     private MoveType visitAssessment(String input) throws InvalidInputException {
         switch (input) {
-            case "place_move":
-                return MoveType.PLACE;
-            case "pass":
-                return MoveType.PASS;
+            case "move": /* TODO: Use Chess notation */
+                return MoveType.MOVE;
             default:
                 throw new InvalidInputException("Move isn't valid");
         }

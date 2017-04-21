@@ -2,7 +2,7 @@ package io.riddles.chess.validator;
 
 import io.riddles.chess.game.state.ChessState;
 import io.riddles.chess.move.ChessMove;
-import io.riddles.boardgame.model.ValidationResult;
+import io.riddles.chess.model.ValidationResult;
 import io.riddles.chess.model.*;
 import io.riddles.game.validator.MoveValidator;
 
@@ -30,8 +30,8 @@ public class QueenMoveValidator extends ChessPieceMoveValidator implements MoveV
         MoveValidator bishopMoveValidator = new BishopMoveValidator();
         MoveValidator rookMoveValidator = new RookMoveValidator();
 
-        Boolean isValidBishopMove = bishopMoveValidator.isValid(move, state).isValid();
-        Boolean isValidRookMove = rookMoveValidator.isValid(move, state).isValid();
+        Boolean isValidBishopMove = bishopMoveValidator.validate(move, state).isValid();
+        Boolean isValidRookMove = rookMoveValidator.validate(move, state).isValid();
 
         boolean isValid = isValidBishopMove || isValidRookMove;
         if (isValid) {

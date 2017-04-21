@@ -1,10 +1,8 @@
 package io.riddles.chess.validator;
 
-import io.riddles.boardgame.model.*;
+import io.riddles.chess.model.ValidationResult;
 import io.riddles.chess.data.ChessBoard;
 import io.riddles.chess.data.ChessPiece;
-import io.riddles.chess.data.Piece;
-import io.riddles.chess.data.Piece.PieceColor;
 import io.riddles.chess.model.ChessPieceColor;
 import io.riddles.chess.model.ChessPieceType;
 import io.riddles.chess.game.state.ChessState;
@@ -26,21 +24,7 @@ import java.util.ArrayList;
  */
 public final class ChessMoveValidator implements MoveValidator<ChessState> {
 
-    private ArrayList<MoveValidator> validators;
-
     public ChessMoveValidator() {
-
-        ArrayList<MoveValidator> validators = new ArrayList<>();
-
-        validators.add(new FromNotEmptyValidator());
-        validators.add(new BishopMoveValidator());
-        validators.add(new KingMoveValidator());
-        validators.add(new KnightMoveValidator());
-        validators.add(new PawnMoveValidator());
-        validators.add(new QueenMoveValidator());
-        validators.add(new RookMoveValidator());
-
-        this.validators = validators;
     }
 
     @Override
@@ -98,5 +82,6 @@ public final class ChessMoveValidator implements MoveValidator<ChessState> {
                 return result;
             }
         }
+        return new ValidationResult(false, "Move could not be validated.");
     }
 }

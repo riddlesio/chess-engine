@@ -2,6 +2,7 @@ package io.riddles.chess.game;
 
 import io.riddles.chess.data.ChessBoard;
 import io.riddles.chess.game.player.ChessPlayer;
+import io.riddles.chess.game.processor.ChessProcessor;
 import io.riddles.chess.game.state.ChessState;
 import io.riddles.chess.state.ChessPlayerState;
 import io.riddles.javainterface.configuration.Configuration;
@@ -43,6 +44,8 @@ public class ChessEngine extends AbstractEngine<ChessProcessor, ChessPlayer, Che
     protected Configuration getDefaultConfiguration() {
         Configuration configuration = new Configuration();
         configuration.put("maxRounds", 200); /* Note: in the previous version of Block Battle, maxRounds was set to -1 */
+        configuration.put("field_height", 8); /* Note: in the previous version of Block Battle, maxRounds was set to -1 */
+        configuration.put("field_width", 8); /* Note: in the previous version of Block Battle, maxRounds was set to -1 */
         return configuration;
     }
 
@@ -70,8 +73,8 @@ public class ChessEngine extends AbstractEngine<ChessProcessor, ChessPlayer, Che
         }
         playerNames = playerNames.substring(0, playerNames.length()-1);
 
-        player.sendSetting("field_height", configuration.getInt("fieldHeight"));
-        player.sendSetting("field_width", configuration.getInt("fieldWidth"));
+        //player.sendSetting("field_height", configuration.getInt("fieldHeight"));
+        //player.sendSetting("field_width", configuration.getInt("fieldWidth"));
         player.sendSetting("max_rounds", configuration.getInt("maxRounds"));
         player.sendSetting("player_names", playerNames);
         player.sendSetting("your_bot", player.getName());
@@ -94,6 +97,15 @@ public class ChessEngine extends AbstractEngine<ChessProcessor, ChessPlayer, Che
     protected ChessState getInitialState() {
         ArrayList<ChessPlayerState> playerStates = new ArrayList<>();
         ChessBoard board = new ChessBoard(configuration.getInt("fieldWidth"), (configuration.getInt("fieldHeight")));
+        board.setFieldsFromString(
+                "RNBKQBNR" +
+                "PPPPPPPP" +
+                "........" +
+                "........" +
+                "........" +
+                "........" +
+                "pppppppp" +
+                "rnbkqbnr" );
 
         for (ChessPlayer player : playerProvider.getPlayers()) {
             ChessPlayerState playerState = new ChessPlayerState(player.getId());
