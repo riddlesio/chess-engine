@@ -30,6 +30,7 @@ public final class ChessMoveValidator implements MoveValidator<ChessState> {
         ArrayList<MoveValidator> validators = new ArrayList<>();
 
         validators.add(new FromNotEmptyValidator());
+        validators.add(new ToEmptyOrOppositePlayerValidator());
         validators.add(new ChessPieceColorValidator());
         validators.add(new BishopMoveValidator());
         validators.add(new KingMoveValidator());

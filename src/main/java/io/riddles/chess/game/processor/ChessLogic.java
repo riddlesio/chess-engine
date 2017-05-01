@@ -24,6 +24,9 @@ public class ChessLogic {
         ChessMoveValidator validator = new ChessMoveValidator();
         ValidationResult vr = validator.validate(move, state);
         if (vr.isValid()) {
+            if (board.getFieldAt(move.getTo()) != null) {
+                /* Capture piece */
+            }
             board.move(move.getFrom(), move.getTo());
         }
         System.out.println("Move " + board.getFieldAt(move.getFrom()) + " to " + move.getTo().getX() + "," + move.getTo().getY() + ": " + vr.isValid() + " "+ vr.getReason());

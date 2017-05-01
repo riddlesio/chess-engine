@@ -53,6 +53,8 @@ public class PawnMoveValidator extends ChessPieceMoveValidator implements MoveVa
         }
 
         if (isValid) {
+            if (Math.abs(deltaY) > 1)
+                chessPiece.hadPreviousDoublePush();
             return new ValidationResult(true, "");
         }
 

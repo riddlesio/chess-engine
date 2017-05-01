@@ -17,6 +17,7 @@ public class ChessPiece {
     ChessPieceType type;
     ChessPieceColor color;
     private boolean hasMoved;
+    private boolean previousDoublePush;
 
     public ChessPiece(ChessPieceType type, ChessPieceColor color) {
         this.type = type;
@@ -27,6 +28,7 @@ public class ChessPiece {
         this.hasMoved = piece.hasMoved();
         this.color = piece.getColor();
         this.type = piece.getType();
+        this.previousDoublePush = piece.hadPreviousDoublePush();
     }
 
     public Boolean hasColor(ChessPieceColor color) {
@@ -47,4 +49,8 @@ public class ChessPiece {
 
     public void setMoved() { this.hasMoved = true; }
     public boolean hasMoved() { return this.hasMoved; }
+    public void setDoublePush() { this.previousDoublePush = true; }
+    public boolean hadPreviousDoublePush() { return this.previousDoublePush; }
+    /* TODO: reset double push automatically */
+
 }
